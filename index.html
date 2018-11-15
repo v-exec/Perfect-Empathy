@@ -1,0 +1,61 @@
+<html>
+<head>
+	<title>PERFECT EMPATHY</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700|Roboto+Mono">
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+
+<body>
+	<div id="main">
+		<div id="field">
+			<div class="cardslot monster"></div>
+			<div class="cardslot monster"></div>
+			<div class="cardslot monster"></div>
+			<div class="cardslot monster end"></div>
+
+			<div class="cardslot attack"></div>
+			<div class="cardslot attack"></div>
+			<div class="cardslot attack"></div>
+			<div class="cardslot attack end"></div>
+
+			<div class="cardslot attack hidden"></div>
+			<div class="cardslot attack hidden"></div>
+			<div class="cardslot attack hidden"></div>
+			<div class="cardslot attack hidden end"></div>
+		</div>
+
+		<div id="hand">
+			<div class="handslot hand"></div>
+			<div class="handslot hand"></div>
+			<div class="handslot hand"></div>
+			<div class="handslot hand"></div>
+			<div class="handslot hand end"></div>
+		</div>
+
+		<div id="stats">
+			<div class="stat statleft">
+				<span class="statfield" id="room"></span>
+				<br>
+				<span class="statfield" id="monsters"></span>
+			</div>
+
+			<div class="stat statmiddle">
+				<span class="statfield" id="health"></span>
+			</div>
+
+			<div class="stat statright">
+				<a href="#" class="statfield statlink" id="skip">Next Room</a>
+				<a href="#" class="statfield statlink" id="turn">Play Turn</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="cards"></div>
+	
+	<script src="script/cards.js"></script>
+	<script src="script/elementHelpers.js"></script>
+	<script src="script/abstractHelpers.js"></script>
+	<script src="script/master.js"></script>
+</body>
+</html>
