@@ -11,6 +11,9 @@ var handSlots = document.getElementsByClassName('hand');
 
 var cardBase = document.getElementById('cards');
 
+var instructions = document.getElementById('instructions');
+var instructionsButton = document.getElementById('instructionsbutton');
+
 //slots
 var mSlots = [];
 var aSlots = [];
@@ -35,6 +38,8 @@ var takenSlot = null;
 //trackers and stats
 var room = 1;
 var health = 50;
+var log = '';
+var instructionsToggle = false;
 
 //setup on start
 function setup() {
@@ -43,15 +48,19 @@ function setup() {
 	createMonsters();
 	createAttacks();
 
+	instructionsButton.addEventListener('click', toggleInstructions, true);
+
 	loadRoom();
 	refillHand();
 	updateStats();
 
 	console.log('Dungeon Loaded.');
+	log += 'Dungeon Loaded.';
 }
 
 //loads room - spawns monsters
 function loadRoom() {
+
 	if (liveMonsters().length <= 0) {
 		winGame();
 	}
@@ -69,6 +78,8 @@ function loadRoom() {
 			liveMonsters()[i].slot = mSlots[i];
 		}
 	}
+
+	blockSlots();
 
 	updateStats();
 }
@@ -91,12 +102,17 @@ function playTurn() {
 		if (mSlots[i].card) empty = false;
 	}
 
+	blockSlots();
+
 	refillHand();
 
 	//update
 	if (empty) {
 		room++;
-		loadRoom();
+		setTimeout(function () {
+			loadRoom();
+		}, 1000);
+		
 	}
 
 	updateStats();
@@ -126,7 +142,9 @@ function skipTurn() {
 
 		shuffleArray(monsters);
 		room++;
-		loadRoom();
+		setTimeout(function () {
+			loadRoom();
+		}, 1000);
 	}
 }
 
@@ -138,6 +156,18 @@ function loseGame() {
 //win game
 function winGame() {
 	//
+}
+
+
+//open instructions
+function toggleInstructions() {
+	instructionsToggle = !instructionsToggle;
+
+	if (instructionsToggle) {
+		instructions.style.display = 'block';
+	} else {
+		instructions.style.display = 'none';
+	}
 }
 
 //on mouse up - check location of drop
@@ -196,6 +226,7 @@ function mouseUp(e) {
 				takenSlot = null;
 			}
 			holding.style.zIndex = 2;
+			holding.style.opacity = 1;
 			holding = null;
 		}
 
@@ -227,7 +258,9 @@ function mouseDown(e) {
 				break;
 		}
 
+		holding.style.opacity = 0.5;
 		changeSize(holding, 35, largeWidth + 20, largeHeight + 20);
+
 		window.addEventListener('mousemove', moveCard, true);
 	}
 }
@@ -262,6 +295,7 @@ function moveCard(e) {
 //consume card (for health)
 function consumeClick(e) {
 	consumeHealth(mSlots[e.target.getAttribute('slot')]);
+	blockSlots();
 	updateStats();
 }
 

@@ -10,14 +10,11 @@ The current online version can be played [here](https://v-exec.github.io/Perfect
 ## To do
 
 ### Design
-- ui stats rework
 - better attack card display for hidden attack cards
 - small pause after room clear
-- graphics rework + graphics on ui layer
+- graphics and ui rework
 
 ### Function
-- mobile friendly
 - log / game commentary feed
 - endstates
-- instructions
-- card placement on other card swaps their positions
+- card swap

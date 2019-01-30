@@ -87,8 +87,8 @@ function createCard(card, slot, i) {
 
 //repositions card to given slot
 function repositionToSlot(card, slot) {
-	slot.x = slot.element.getBoundingClientRect().left;
-	slot.y = slot.element.getBoundingClientRect().top;
+	slot.x = slot.htmlobject.getBoundingClientRect().left;
+	slot.y = slot.htmlobject.getBoundingClientRect().top;
 	card.style.left = slot.x;
 	card.style.top = slot.y;
 }
@@ -96,18 +96,18 @@ function repositionToSlot(card, slot) {
 //repositions slots
 function recalculateSlots() {
 	for (var i = 0; i < mSlots.length; i++) {
-		mSlots[i].x = mSlots[i].element.getBoundingClientRect().left;
-		mSlots[i].y = mSlots[i].element.getBoundingClientRect().top;
+		mSlots[i].x = mSlots[i].htmlobject.getBoundingClientRect().left;
+		mSlots[i].y = mSlots[i].htmlobject.getBoundingClientRect().top;
 	}
 
 	for (var i = 0; i < aSlots.length; i++) {
-		aSlots[i].x = aSlots[i].element.getBoundingClientRect().left;
-		aSlots[i].y = aSlots[i].element.getBoundingClientRect().top;
+		aSlots[i].x = aSlots[i].htmlobject.getBoundingClientRect().left;
+		aSlots[i].y = aSlots[i].htmlobject.getBoundingClientRect().top;
 	}
 
 	for (var i = 0; i < mSlots.length; i++) {
-		hSlots[i].x = hSlots[i].element.getBoundingClientRect().left;
-		hSlots[i].y = hSlots[i].element.getBoundingClientRect().top;
+		hSlots[i].x = hSlots[i].htmlobject.getBoundingClientRect().left;
+		hSlots[i].y = hSlots[i].htmlobject.getBoundingClientRect().top;
 	}
 }
 
@@ -184,6 +184,29 @@ function flipCard(card, attack) {
 		card.childNodes[2].style.bottom = 'auto';
 		card.childNodes[3].style.bottom = s;
 		card.childNodes[3].style.top = 'auto';
+	}
+}
+
+//swap cards
+function swapCards() {
+
+}
+
+//set slot visuals
+function blockSlots() {
+	for (var i = 0; i < mSlots.length; i++) {
+		if (mSlots[i].card) {
+			if (mSlots[i].data.element == 'heal') {
+				aSlots[i].htmlobject.style.backgroundColor = '#000';
+				aSlots[i + 4].htmlobject.style.backgroundColor = '#000';
+			} else {
+				aSlots[i].htmlobject.style.backgroundColor = 'none';
+				aSlots[i + 4].htmlobject.style.backgroundColor = 'none';
+			}
+		} else {
+			aSlots[i].htmlobject.style.backgroundColor = '#000';
+			aSlots[i + 4].htmlobject.style.backgroundColor = '#000';
+		}
 	}
 }
 

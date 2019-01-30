@@ -15,13 +15,18 @@ function Monster(type, element, health) {
 	this.form;
 	this.elementForm = null;
 
-	if (element != 'heal') {
-		this.form = 'assets/monsters/5.svg';
-		//this.form = 'assets/monsters/' + health + '.svg';
-		this.elementForm = 'assets/elements/' + element + '.svg';
-	} else {
-		this.form = 'assets/elements/heal.svg';
-	}
+	// if (element != 'heal') {
+	// 	this.elementForm = 'assets/elements/' + element + '.svg';
+
+	// 	if (health > 11) this.form = 'assets/monsters/' + health + '.svg';
+	// 	else this.form = 'assets/monsters/1.svg';
+		
+	// } else {
+	// 	this.form = 'assets/elements/heal.svg';
+	// }
+
+	this.form = 'assets/monsters/1.svg';
+	this.elementForm = 'assets/monsters/1.svg';
 }
 
 //attack class - holds all attack card data
@@ -35,14 +40,16 @@ function Attack(type, poleType, pole, opoleType, opole) {
 	this.flipped = false;
 	this.inPair = false;
 	this.live = true;
-	this.poleForm = 'assets/elements/' + poleType + '.svg';
-	this.opoleForm = 'assets/elements/' + opoleType + '.svg';
+	//this.poleForm = 'assets/elements/' + poleType + '.svg';
+	//this.opoleForm = 'assets/elements/' + opoleType + '.svg';
+	this.poleForm = 'assets/monsters/1.svg';
+	this.opoleForm = 'assets/monsters/1.svg';
 }
 
 //slot class - holds all slot data
-function Slot(type, element, x, y, width, height) {
+function Slot(type, htmlobject, x, y, width, height) {
 	this.type = type; //monster, attack, hand
-	this.element = element;
+	this.htmlobject = htmlobject;
 	this.card = null;
 	this.data = null;
 	this.x = x;

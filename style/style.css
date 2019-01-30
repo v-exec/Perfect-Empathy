@@ -58,6 +58,38 @@ a:hover {
 	height: 70px;
 }
 
+#instructions {
+	display: none;
+	position: fixed;
+	width: 860px;
+	height: 860px;
+	top: calc(50% - 430px);
+	left: calc(50% - 430px);
+	padding: 15px;
+	border-radius: 6px;
+	border: 1px solid #555;
+	font-family: "Roboto Mono";
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 22px;
+	color: #777;
+	z-index: 3;
+}
+
+#instructionsbutton {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	font-family: "Roboto Mono";
+	font-weight: 400;
+	font-size: 15px;
+	color: #555;
+}
+
+#instructionsbutton:hover {
+	color: #fff;
+}
+
 .stat {
 	display: inline-block;
 	vertical-align: top;
@@ -170,11 +202,11 @@ a:hover {
 }
 
 .monsterelement {
-	position: relative;
+	position: absolute;
 	background-color: rgba(0,0,0,0);
-	left: 0;
-	margin: 2px 0 0 5px;
-	width: 15%;
+	right: 15px;
+	top: 15px;
+	width: 20%;
 	pointer-events: none;
 }
 
@@ -196,7 +228,7 @@ a:hover {
 .poleimage,
 .opoleimage {
 	position: absolute;
-	width: 40%;
+	width: 50%;
 	background-color: rgba(0,0,0,0);
 	pointer-events: none;
 }
