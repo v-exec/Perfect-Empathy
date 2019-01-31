@@ -112,7 +112,6 @@ function playTurn() {
 		setTimeout(function () {
 			loadRoom();
 		}, 1000);
-		
 	}
 
 	updateStats();
@@ -150,12 +149,12 @@ function skipTurn() {
 
 //lose game
 function loseGame() {
-	//
+	console.log('You died.');
 }
 
 //win game
 function winGame() {
-	//
+	console.log('You won.');
 }
 
 

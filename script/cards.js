@@ -15,18 +15,15 @@ function Monster(type, element, health) {
 	this.form;
 	this.elementForm = null;
 
-	// if (element != 'heal') {
-	// 	this.elementForm = 'assets/elements/' + element + '.svg';
+	if (element != 'heal') {
+		this.elementForm = 'assets/elements/' + element + '.svg';
 
-	// 	if (health > 11) this.form = 'assets/monsters/' + health + '.svg';
-	// 	else this.form = 'assets/monsters/1.svg';
+		if (health > 10) this.form = 'assets/monsters/' + health + '.svg';
+		else this.form = 'assets/monsters/1.svg';
 		
-	// } else {
-	// 	this.form = 'assets/elements/heal.svg';
-	// }
-
-	this.form = 'assets/monsters/1.svg';
-	this.elementForm = 'assets/monsters/1.svg';
+	} else {
+		this.form = 'assets/elements/heal.svg';
+	}
 }
 
 //attack class - holds all attack card data
@@ -40,10 +37,8 @@ function Attack(type, poleType, pole, opoleType, opole) {
 	this.flipped = false;
 	this.inPair = false;
 	this.live = true;
-	//this.poleForm = 'assets/elements/' + poleType + '.svg';
-	//this.opoleForm = 'assets/elements/' + opoleType + '.svg';
-	this.poleForm = 'assets/monsters/1.svg';
-	this.opoleForm = 'assets/monsters/1.svg';
+	this.poleForm = 'assets/elements/' + poleType + '.svg';
+	this.opoleForm = 'assets/elements/' + opoleType + '.svg';
 }
 
 //slot class - holds all slot data

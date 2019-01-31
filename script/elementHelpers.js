@@ -187,25 +187,20 @@ function flipCard(card, attack) {
 	}
 }
 
-//swap cards
-function swapCards() {
-
-}
-
 //set slot visuals
 function blockSlots() {
 	for (var i = 0; i < mSlots.length; i++) {
 		if (mSlots[i].card) {
 			if (mSlots[i].data.element == 'heal') {
-				aSlots[i].htmlobject.style.backgroundColor = '#000';
-				aSlots[i + 4].htmlobject.style.backgroundColor = '#000';
+				aSlots[i].htmlobject.style.backgroundColor = '#333';
+				aSlots[i + 4].htmlobject.style.backgroundColor = '#333';
 			} else {
 				aSlots[i].htmlobject.style.backgroundColor = 'none';
 				aSlots[i + 4].htmlobject.style.backgroundColor = 'none';
 			}
 		} else {
-			aSlots[i].htmlobject.style.backgroundColor = '#000';
-			aSlots[i + 4].htmlobject.style.backgroundColor = '#000';
+			aSlots[i].htmlobject.style.backgroundColor = '#333';
+			aSlots[i + 4].htmlobject.style.backgroundColor = '#333';
 		}
 	}
 }

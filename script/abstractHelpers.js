@@ -374,7 +374,9 @@ function consumeHealth(slot) {
 	}
 	if (empty) {
 		room++;
-		loadRoom();
+		setTimeout(function () {
+			loadRoom();
+		}, 1000);
 	}
 }
 
