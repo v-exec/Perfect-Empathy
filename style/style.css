@@ -24,7 +24,8 @@ a:hover {
 
 /* UI */
 
-#main {
+#main,
+#inputblocker {
 	position: absolute;
 	width: 900px;
 	height: calc(586px + 241.5px + 70px + 3px);
@@ -32,6 +33,12 @@ a:hover {
 	left: 50%;
 	margin: calc((-586px - 241.5px - 70px - 3px) /2) 0 0 calc(-900px/2);
 	z-index: 0;
+}
+
+#inputblocker {
+	display: none;
+	background-color: rgba(0, 0, 0, 0);
+	z-index: 100;
 }
 
 #field,
@@ -58,6 +65,26 @@ a:hover {
 	height: 70px;
 }
 
+#log {
+	display: block;
+	position: absolute;
+	width: 200px;
+	height: 900px;
+	top: 0;
+	left: -200px;
+	padding: 15px;
+	border-top: 1px solid #555;
+	font-family: "Roboto Mono";
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 18px;
+	color: #777;
+}
+
+#logtext {
+	overflow-y: auto;
+}
+
 #instructions {
 	display: none;
 	position: fixed;
@@ -76,7 +103,8 @@ a:hover {
 	z-index: 3;
 }
 
-#instructionsbutton {
+#instructionsbutton,
+#logbutton {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
@@ -86,8 +114,35 @@ a:hover {
 	color: #555;
 }
 
+#logbutton {
+	bottom: 40px;
+}
+
 #instructionsbutton:hover {
 	color: #fff;
+}
+
+#logbutton:hover {
+	color: #fff;
+}
+
+#win, #lose {
+	display: none;
+	position: fixed;
+	width: 160px;
+	height: 60px;
+	top: calc(50% - 30px);
+	left: calc(50% - 80px);
+	text-align: center;
+	padding: 15px;
+	border-radius: 6px;
+	border: 1px solid #555;
+	font-family: "Roboto Mono";
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	color: #777;
+	z-index: 4;
 }
 
 .stat {
@@ -147,7 +202,7 @@ a:hover {
 	bottom: 268px;
 	margin-right: 20px;
 	z-index: -1;
-	border: 1px solid #333;
+	border: 1px solid #555;
 }
 
 .cardslot.hidden.end {
@@ -174,6 +229,10 @@ a:hover {
 
 .hover {
 	cursor: pointer;
+}
+
+.hover:hover {
+	box-shadow: inset 0 0 0 1px #fff;
 }
 
 .card {

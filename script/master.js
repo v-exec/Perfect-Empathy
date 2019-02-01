@@ -14,6 +14,15 @@ var cardBase = document.getElementById('cards');
 var instructions = document.getElementById('instructions');
 var instructionsButton = document.getElementById('instructionsbutton');
 
+var win = document.getElementById('win');
+var lose = document.getElementById('lose');
+
+var logElement = document.getElementById('log');
+var logText = document.getElementById('logtext');
+var logButton = document.getElementById('logbutton');
+
+var inputBlocker = document.getElementById('inputblocker');
+
 //slots
 var mSlots = [];
 var aSlots = [];
@@ -40,6 +49,7 @@ var room = 1;
 var health = 50;
 var log = '';
 var instructionsToggle = false;
+var logToggle = true;
 
 //setup on start
 function setup() {
@@ -49,13 +59,20 @@ function setup() {
 	createAttacks();
 
 	instructionsButton.addEventListener('click', toggleInstructions, true);
+	logButton.addEventListener('click', toggleLog, true);
 
 	loadRoom();
 	refillHand();
 	updateStats();
 
-	console.log('Dungeon Loaded.');
-	log += 'Dungeon Loaded.';
+	updateLog('Dungeon loaded.');
+}
+
+//add new line to log
+function updateLog(text) {
+	log += text + '<br><br>';
+	logText.innerHTML = log;
+	logText.scrollTop = logText.scrollHeight;
 }
 
 //loads room - spawns monsters
@@ -80,7 +97,6 @@ function loadRoom() {
 	}
 
 	blockSlots();
-
 	updateStats();
 }
 
@@ -103,7 +119,6 @@ function playTurn() {
 	}
 
 	blockSlots();
-
 	refillHand();
 
 	//update
@@ -149,16 +164,19 @@ function skipTurn() {
 
 //lose game
 function loseGame() {
-	console.log('You died.');
+	updateLog('You died.');
+	lose.style.display = 'block';
+	inputBlocker.style.display = 'block';
 }
 
 //win game
 function winGame() {
-	console.log('You won.');
+	updateLog('You won.');
+	win.style.display = 'block';
+	inputBlocker.style.display = 'block';
 }
 
-
-//open instructions
+//toggle instructions
 function toggleInstructions() {
 	instructionsToggle = !instructionsToggle;
 
@@ -166,6 +184,17 @@ function toggleInstructions() {
 		instructions.style.display = 'block';
 	} else {
 		instructions.style.display = 'none';
+	}
+}
+
+//toggle log
+function toggleLog() {
+	logToggle = !logToggle;
+
+	if (logToggle) {
+		logElement.style.display = 'block';
+	} else {
+		logElement.style.display = 'none';
 	}
 }
 
@@ -188,6 +217,7 @@ function mouseUp(e) {
 							target = true;
 							moveToSlot(holding, aSlots[i], takenSlot.data, i);
 							changeSize(holding, 30, largeWidth, largeHeight);
+							updateLog('Moved card to attack slot ' + i + '.');
 						}
 					}
 					break;
@@ -200,6 +230,7 @@ function mouseUp(e) {
 						target = true;
 						moveToSlot(holding, hSlots[i], takenSlot.data, i);
 						changeSize(holding, 20, smallWidth, smallHeight);
+						updateLog('Moved card to hand slot ' + i + '.');
 					}
 					break;
 				}

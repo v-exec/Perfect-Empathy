@@ -195,8 +195,8 @@ function blockSlots() {
 				aSlots[i].htmlobject.style.backgroundColor = '#333';
 				aSlots[i + 4].htmlobject.style.backgroundColor = '#333';
 			} else {
-				aSlots[i].htmlobject.style.backgroundColor = 'none';
-				aSlots[i + 4].htmlobject.style.backgroundColor = 'none';
+				aSlots[i].htmlobject.style.backgroundColor = '#222';
+				aSlots[i + 4].htmlobject.style.backgroundColor = '#222';
 			}
 		} else {
 			aSlots[i].htmlobject.style.backgroundColor = '#333';
