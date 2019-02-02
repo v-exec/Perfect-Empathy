@@ -80,6 +80,8 @@ function loadRoom() {
 
 	if (liveMonsters().length <= 0) {
 		winGame();
+	} else {
+		updateLog('Moved to next room.');
 	}
 
 	if (liveMonsters().length < 4) {
@@ -102,36 +104,45 @@ function loadRoom() {
 
 //plays turn - calculates damage to enemies and self, death, nullifications, cleans board, loads next phase
 function playTurn() {
-	updateLog('===<br>Turn played.')
-
-	var monster;
+	var hasCards = false;
+	for (var i = 0; i < aSlots.length; i++) {
+		if (aSlots[i].card) hasCards = true;
+	}
 	
-	//monster
-	for (var i = 0; i < mSlots.length; i++) {
-		if (mSlots[i].data) damageMonster(mSlots[i].data, i);
+	if (hasCards) {
+		updateLog('<b>===<br>Turn played.</b>')
+
+		var monster;
+		
+		//monster
+		for (var i = 0; i < mSlots.length; i++) {
+			if (mSlots[i].data) damageMonster(mSlots[i].data, i);
+		}
+
+		//self
+		damageSelf();
+
+		//load
+		var empty = true;
+		for (var i = 0; i < mSlots.length; i++) {
+			if (mSlots[i].card) empty = false;
+		}
+
+		blockSlots();
+		refillHand();
+
+		//update
+		if (empty) {
+			room++;
+			setTimeout(function () {
+				loadRoom();
+			}, 1000);
+		}
+
+		updateStats();
+	} else {
+		updateLog('Cannot play turn with no attack cards on the field.')
 	}
-
-	//self
-	damageSelf();
-
-	//load
-	var empty = true;
-	for (var i = 0; i < mSlots.length; i++) {
-		if (mSlots[i].card) empty = false;
-	}
-
-	blockSlots();
-	refillHand();
-
-	//update
-	if (empty) {
-		room++;
-		setTimeout(function () {
-			loadRoom();
-		}, 1000);
-	}
-
-	updateStats();
 }
 
 //skip turn when only hearts remain
@@ -161,6 +172,8 @@ function skipTurn() {
 		setTimeout(function () {
 			loadRoom();
 		}, 1000);
+	} else {
+		updateLog('Cannot skip turn with live monsters on the field.')
 	}
 }
 

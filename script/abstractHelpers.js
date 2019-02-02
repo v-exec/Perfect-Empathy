@@ -229,10 +229,12 @@ function damageMonster(monster, slot) {
 
 		monster.health = monster.health - damage;
 
-		if (doubled && secondDoubled) updateLog('Monster in monster slot ' + slot + ' took double damage from both attack cards, resulting in ' + damage + ' damage.');
-		else if (doubled && !secondDoubled) updateLog('Monster in monster slot ' + slot + ' took double damage from the first attack card, resulting in ' + damage + ' damage.');
-		else if (!doubled && secondDoubled) updateLog('Monster in monster slot ' + slot + ' took double damage from the second attack card, resulting in ' + damage + ' damage.');
-		else updateLog('Monster in monster slot ' + slot + ' took ' + damage + ' damage.');
+		if (monster.element != 'heal') {
+			if (doubled && secondDoubled) updateLog('Monster in slot ' + slot + ' took double damage from both attack cards: ' + damage + ' damage.');
+			else if (doubled && !secondDoubled) updateLog('Monster in slot ' + slot + ' took double damage from first attack card: ' + damage + ' damage.');
+			else if (!doubled && secondDoubled) updateLog('Monster in slot ' + slot + ' took double damage from second attack card: ' + damage + ' damage.');
+			else updateLog('Monster in slot ' + slot + ' took ' + damage + ' damage.');
+		}
 
 		if (monster.health <= 0) {
 			monster.health = 0;
@@ -244,7 +246,7 @@ function damageMonster(monster, slot) {
 
 			monster.slot = null;
 			monster.type = null;
-			updateLog('Monster in monster slot ' + slot + ' was killed.');
+			updateLog('Monster in slot ' + slot + ' was killed.');
 		} else {
 			monster.slot.card.childNodes[0].innerHTML = monster.health;
 		}
@@ -312,13 +314,21 @@ function damageSelf() {
 			if (!aSlots[i].data.flipped) {
 				if (aSlots[i].data.inPair) {
 					damage += (aSlots[i].data.opole) / 2;
+					updateLog('Attack card in slot ' + i + ' was in a nullification pair, and did half damage: ' + (aSlots[i].data.opole) / 2 + ' damage to self.');
 				}
-				else damage += aSlots[i].data.opole;
+				else {
+					damage += aSlots[i].data.opole;
+					updateLog('Attack card in slot ' + i + ' did ' + aSlots[i].data.opole +  ' damage to self.');
+				}
 			} else {
 				if (aSlots[i].data.inPair) {
 					damage += (aSlots[i].data.pole) / 2;
+					updateLog('Attack card in slot ' + i + ' was in a nullification pair, and did half damage: ' + (aSlots[i].data.pole) / 2 + ' damage to self.');
 				}
-				else damage += aSlots[i].data.pole;
+				else {
+					damage += aSlots[i].data.pole;
+					updateLog('Attack card in slot ' + i + ' did ' + aSlots[i].data.pole +  ' damage to self.');
+				}
 			}
 		}
 	}
@@ -326,7 +336,10 @@ function damageSelf() {
 	//add remaning monster damage
 	for (var i = 0; i < mSlots.length; i++) {
 		if (mSlots[i].data) {
-			if (mSlots[i].data.element !== 'heal') damage += mSlots[i].data.health;
+			if (mSlots[i].data.element !== 'heal') {
+				damage += mSlots[i].data.health;
+				updateLog('Monster in slot ' + i + ' survived, dealing its remaining health in damage: ' + mSlots[i].data.health + '.');
+			}
 		}
 	}
 	
@@ -371,6 +384,8 @@ function refillHand() {
 			changeSize(hSlots[i].card, 20, smallWidth, smallHeight);
 		}
 	}
+
+	updateLog('Hand was filled with cards.');
 }
 
 //consume health card
@@ -378,7 +393,7 @@ function consumeHealth(slot) {
 	health += slot.data.health;
 	if (health > 50) health = 50;
 
-	updateLog(slot.data.health + ' health was consumed, resulting in a total of ' + health + ' health.')
+	updateLog(slot.data.health + ' health was consumed. Total health: ' + health + '.');
 
 	slot.data.health = 0;
 	slot.data.live = false;
