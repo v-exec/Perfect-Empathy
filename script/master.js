@@ -102,6 +102,8 @@ function loadRoom() {
 
 //plays turn - calculates damage to enemies and self, death, nullifications, cleans board, loads next phase
 function playTurn() {
+	updateLog('===<br>Turn played.')
+
 	var monster;
 	
 	//monster

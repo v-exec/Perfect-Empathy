@@ -82,7 +82,13 @@ a:hover {
 }
 
 #logtext {
+	display: block;
 	overflow-y: auto;
+	height: 100%;
+}
+
+#logtext::-webkit-scrollbar {
+	width: 0 !important;
 }
 
 #instructions {

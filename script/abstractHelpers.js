@@ -192,6 +192,10 @@ function liveAttacks() {
 //damages and kills monster at given slot
 function damageMonster(monster, slot) {
 	if (monster) {
+		
+		var doubled = false;
+		var secondDoubled = false;
+
 		var cards = [];
 		cards.push(aSlots[slot].data);
 		if (aSlots[slot + 4].card) cards.push(aSlots[slot + 4].data);
@@ -202,10 +206,18 @@ function damageMonster(monster, slot) {
 			if (cards[i]) {
 				if (!cards[i].flipped) {
 					damages[i] = cards[i].pole;
-					if (cards[i].poleType === monster.element) damages[i] *= 2;
+					if (cards[i].poleType === monster.element) {
+						damages[i] *= 2;
+						if (i == 0) doubled = true;
+						else secondDoubled = true;
+					}
 				} else {
 					damages[i] = cards[i].opole;
-					if (cards[i].opoleType === monster.element) damages[i] *= 2;
+					if (cards[i].opoleType === monster.element) {
+						damages[i] *= 2;
+						if (i == 0) doubled = true;
+						else secondDoubled = true;
+					}
 				}
 			}
 		}
@@ -217,6 +229,11 @@ function damageMonster(monster, slot) {
 
 		monster.health = monster.health - damage;
 
+		if (doubled && secondDoubled) updateLog('Monster in monster slot ' + slot + ' took double damage from both attack cards, resulting in ' + damage + ' damage.');
+		else if (doubled && !secondDoubled) updateLog('Monster in monster slot ' + slot + ' took double damage from the first attack card, resulting in ' + damage + ' damage.');
+		else if (!doubled && secondDoubled) updateLog('Monster in monster slot ' + slot + ' took double damage from the second attack card, resulting in ' + damage + ' damage.');
+		else updateLog('Monster in monster slot ' + slot + ' took ' + damage + ' damage.');
+
 		if (monster.health <= 0) {
 			monster.health = 0;
 			monster.live = false;
@@ -227,6 +244,7 @@ function damageMonster(monster, slot) {
 
 			monster.slot = null;
 			monster.type = null;
+			updateLog('Monster in monster slot ' + slot + ' was killed.');
 		} else {
 			monster.slot.card.childNodes[0].innerHTML = monster.health;
 		}
@@ -359,6 +377,8 @@ function refillHand() {
 function consumeHealth(slot) {
 	health += slot.data.health;
 	if (health > 50) health = 50;
+
+	updateLog(slot.data.health + ' health was consumed, resulting in a total of ' + health + ' health.')
 
 	slot.data.health = 0;
 	slot.data.live = false;
