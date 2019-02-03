@@ -385,7 +385,7 @@ function refillHand() {
 		}
 	}
 
-	updateLog('Hand was filled with cards.');
+	updateLog('Hand filled with cards.');
 }
 
 //consume health card

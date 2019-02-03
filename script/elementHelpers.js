@@ -113,19 +113,29 @@ function recalculateSlots() {
 
 //changes card size (from hand size to attack size, or vice versa)
 function changeSize(card, text, width, height) {
+	card.childNodes[2].style.top = '';
+	card.childNodes[3].style.top = '';
+	card.childNodes[2].style.bottom = '';
+	card.childNodes[3].style.bottom = '';
+	card.childNodes[2].style.left = '';
+	card.childNodes[3].style.left = '';
+	card.childNodes[2].style.right = '';
+	card.childNodes[3].style.right = '';
+
+	card.childNodes[0].style.bottom = '';
+	card.childNodes[1].style.bottom = '';
+
 	card.style.width = width + 'px';
 	card.style.height = height + 'px';
+
+	card.childNodes[2].style.width = '40%';
+	card.childNodes[3].style.width = '40%';
 
 	card.childNodes[0].style.fontSize = text + 'px';
 	card.childNodes[1].style.fontSize = text + 'px';
 
 	card.childNodes[2].style.left = (width / 2) - (card.childNodes[2].offsetWidth / 2) + 'px';
 	card.childNodes[3].style.left = (width / 2) - (card.childNodes[3].offsetWidth / 2) + 'px';
-
-	card.childNodes[2].style.top = 'auto';
-	card.childNodes[3].style.top = 'auto';
-	card.childNodes[2].style.bottom = 'auto';
-	card.childNodes[3].style.bottom = 'auto';
 
 	//get data
 	var type = card.getAttribute('type');
@@ -154,9 +164,59 @@ function changeSize(card, text, width, height) {
 	card.childNodes[4].style.top = (height / 2) - 15 + 'px';
 }
 
+function changeHidden(card, text, width, height) {
+	changeSize(card, text, width, height);
+
+	card.childNodes[2].style.top = '';
+	card.childNodes[3].style.top = '';
+	card.childNodes[2].style.left = '';
+	card.childNodes[3].style.left = '';
+	card.childNodes[2].style.right = '';
+	card.childNodes[3].style.right = '';
+
+	card.childNodes[0].style.fontSize = '12px';
+	card.childNodes[1].style.fontSize = '12px';
+
+	card.childNodes[0].style.bottom = '1.5px';
+	card.childNodes[1].style.bottom = '1.5px';
+
+	card.childNodes[2].style.width = '17px';
+	card.childNodes[3].style.width = '17px';
+
+	card.childNodes[2].style.bottom = '1px';
+	card.childNodes[3].style.bottom = '1px';
+
+	//get data
+	var type = card.getAttribute('type');
+	var slot = card.getAttribute('slot');
+	var data;
+
+	switch (type) {
+		case 'attack':
+			data = aSlots[slot].data;
+			break;
+
+		case 'hand':
+			data = hSlots[slot].data;
+			break;
+	}
+
+	if (data.flipped) {
+		card.childNodes[3].style.left = '32px';
+		card.childNodes[2].style.right = '32px';
+	} else {
+		card.childNodes[3].style.right = '32px';
+		card.childNodes[2].style.left = '32px';
+	}
+}
+
 //flip attack card
 function flipCard(card, attack) {
 	attack.flipped = !attack.flipped;
+
+	//check if in hidden slot
+	var hidden = false;
+	if (card.getAttribute('slot') > 3 && card.getAttribute('type') == 'attack') hidden = true;
 
 	if (attack.flipped) {
 		card.childNodes[0].className = 'attackopole';
@@ -168,9 +228,9 @@ function flipCard(card, attack) {
 		var s1 = card.childNodes[3].style.bottom;
 
 		card.childNodes[3].style.top = s1;
-		card.childNodes[3].style.bottom = 'auto';
+		card.childNodes[3].style.bottom = '';
 		card.childNodes[2].style.bottom = s;
-		card.childNodes[2].style.top = 'auto';
+		card.childNodes[2].style.top = '';
 	} else {
 		card.childNodes[0].className = 'attackpole';
 		card.childNodes[1].className = 'attackopole';
@@ -181,10 +241,12 @@ function flipCard(card, attack) {
 		var s1 = card.childNodes[3].style.top;
 
 		card.childNodes[2].style.top = s1;
-		card.childNodes[2].style.bottom = 'auto';
+		card.childNodes[2].style.bottom = '';
 		card.childNodes[3].style.bottom = s;
-		card.childNodes[3].style.top = 'auto';
+		card.childNodes[3].style.top = '';
 	}
+
+	if (hidden) changeHidden(card, 30, largeWidth, largeHeight);
 }
 
 //set slot visuals

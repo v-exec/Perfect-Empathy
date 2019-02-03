@@ -231,8 +231,13 @@ function mouseUp(e) {
 						if (mSlots[index].card && mSlots[index].data.element !== 'heal') {
 							target = true;
 							moveToSlot(holding, aSlots[i], takenSlot.data, i);
-							changeSize(holding, 30, largeWidth, largeHeight);
-							updateLog('Moved card to attack slot ' + i + '.');
+							if (i > 3) {
+								changeHidden(holding, 30, largeWidth, largeHeight);
+								holding.style.zIndex = 1;
+							} else {
+								changeSize(holding, 30, largeWidth, largeHeight);
+								holding.style.zIndex = 2;
+							}
 						}
 					}
 					break;
@@ -245,7 +250,7 @@ function mouseUp(e) {
 						target = true;
 						moveToSlot(holding, hSlots[i], takenSlot.data, i);
 						changeSize(holding, 20, smallWidth, smallHeight);
-						updateLog('Moved card to hand slot ' + i + '.');
+						holding.style.zIndex = 2;
 					}
 					break;
 				}
@@ -256,21 +261,22 @@ function mouseUp(e) {
 				switch (takenSlot.type) {
 					case 'attack':
 						changeSize(holding, 30, largeWidth, largeHeight);
+						holding.style.zIndex = 2;
 						break;
 
 					case 'hand':
 						changeSize(holding, 20, smallWidth, smallHeight);
+						holding.style.zIndex = 2;
 						break;
 				}
 
 				moveToSlot(holding, takenSlot, takenSlot.data, holding.getAttribute('slot'));
-			}
-			else if (takenSlot) {
+			} else if (takenSlot) {
 				takenSlot.card = null;
 				takenSlot.data = null;
 				takenSlot = null;
 			}
-			holding.style.zIndex = 2;
+
 			holding.style.opacity = 1;
 			holding = null;
 		}

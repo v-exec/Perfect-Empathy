@@ -32,7 +32,6 @@ a:hover {
 	top: 50%;
 	left: 50%;
 	margin: calc((-586px - 241.5px - 70px - 3px) /2) 0 0 calc(-900px/2);
-	z-index: 0;
 }
 
 #inputblocker {
@@ -45,11 +44,12 @@ a:hover {
 #hand,
 #stats {
 	width: 900px;
+	position: relative;
 	border-bottom: 1px solid #555;
 	border-left: 1px solid #555;
 	border-right: 1px solid #555;
 	padding: 20px;
-	z-index: 0;
+	opacity: 1;
 }
 
 #field {
@@ -148,7 +148,7 @@ a:hover {
 	font-size: 18px;
 	line-height: 22px;
 	color: #777;
-	z-index: 4;
+	z-index: 5;
 }
 
 .stat {
@@ -190,12 +190,14 @@ a:hover {
 
 .cardslot {
 	display: inline-block;
+	position: relative;
 	width: calc(((900px - 40px - 2px) / 4) - 18.4px);
 	height: 260px;
 	margin: 0 20px 20px 0;
 	border-radius: 6px;
 	border: 1px solid #555;
-	z-index: 1;
+	opacity: 1;
+	z-index: 2;
 }
 
 .cardslot.end {
@@ -207,7 +209,7 @@ a:hover {
 	width: calc(((900px - 40px - 2px) / 4) - 18.4px);
 	bottom: 268px;
 	margin-right: 20px;
-	z-index: -1;
+	z-index: 1;
 	border: 1px solid #555;
 }
 
@@ -251,8 +253,7 @@ a:hover {
 
 .monsterhealth {
 	position: relative;
-	vertical-align: center;
-	font-family: "Roboto Mono";
+	font-family: "Rubik";
 	color: #fff;
 	font-size: 30px;
 	background-color: rgba(0,0,0,0);
@@ -270,15 +271,15 @@ a:hover {
 	position: absolute;
 	background-color: rgba(0,0,0,0);
 	right: 15px;
-	top: 15px;
-	width: 20%;
+	top: 16px;
+	width: 15%;
 	pointer-events: none;
 }
 
 .attackpole,
 .attackopole {
 	position: absolute;
-	font-family: "Roboto Mono";
+	font-family: "Rubik";
 	color: #fff;
 	font-size: 20px;
 	background-color: rgba(0,0,0,0);
@@ -286,14 +287,14 @@ a:hover {
 }
 
 .attackopole {
-	bottom: 15px;
+	bottom: 12px;
 	right: 15px;
 }
 
 .poleimage,
 .opoleimage {
 	position: absolute;
-	width: 50%;
+	width: 40%;
 	background-color: rgba(0,0,0,0);
 	pointer-events: none;
 }
