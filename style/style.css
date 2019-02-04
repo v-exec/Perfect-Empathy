@@ -284,6 +284,7 @@ a:hover {
 	font-size: 20px;
 	background-color: rgba(0,0,0,0);
 	pointer-events: none;
+	z-index: inherit;
 }
 
 .attackopole {
@@ -297,6 +298,7 @@ a:hover {
 	width: 40%;
 	background-color: rgba(0,0,0,0);
 	pointer-events: none;
+	z-index: inherit;
 }
 
 .opoleimage {
@@ -308,4 +310,5 @@ a:hover {
 	height: 1px;
 	background-color: #fff;
 	pointer-events: none;
+	z-index: inherit;
 }
