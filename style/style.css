@@ -114,6 +114,7 @@ a:hover {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
+	text-align: right;
 	font-family: "Roboto Mono";
 	font-weight: 400;
 	font-size: 15px;
@@ -311,4 +312,24 @@ a:hover {
 	background-color: #fff;
 	pointer-events: none;
 	z-index: inherit;
+}
+
+@media all and (max-width: 1100px), all and (max-height: 900px) {
+	#main,
+	#inputblocker,
+	#instructions,
+	#instructionsbutton,
+	#logbutton,
+	#cards .card {
+		transform: scale(0.6);
+	}
+
+	#instructionsbutton,
+	#logbutton {
+		transform-origin: right;
+	}
+
+	#cards .card {
+		transform-origin: top left;
+	}
 }

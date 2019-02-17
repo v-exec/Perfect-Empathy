@@ -105,7 +105,7 @@ function recalculateSlots() {
 		aSlots[i].y = aSlots[i].htmlobject.getBoundingClientRect().top;
 	}
 
-	for (var i = 0; i < mSlots.length; i++) {
+	for (var i = 0; i < hSlots.length; i++) {
 		hSlots[i].x = hSlots[i].htmlobject.getBoundingClientRect().left;
 		hSlots[i].y = hSlots[i].htmlobject.getBoundingClientRect().top;
 	}
@@ -162,6 +162,7 @@ function changeSize(card, text, width, height) {
 	}
 
 	card.childNodes[4].style.top = (height / 2) - 15 + 'px';
+	card.childNodes[4].style.display = 'block';
 }
 
 function changeHidden(card, text, width, height) {
@@ -208,6 +209,8 @@ function changeHidden(card, text, width, height) {
 		card.childNodes[3].style.right = '32px';
 		card.childNodes[2].style.left = '32px';
 	}
+
+	card.childNodes[4].style.display = 'none';
 }
 
 //flip attack card

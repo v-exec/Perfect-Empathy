@@ -50,6 +50,8 @@ var health = 50;
 var log = '';
 var instructionsToggle = false;
 var logToggle = true;
+var screenSmall = false;
+var screenChange = true;
 
 //setup on start
 function setup() {
@@ -64,6 +66,8 @@ function setup() {
 	loadRoom();
 	refillHand();
 	updateStats();
+
+	resize();
 
 	updateLog('Dungeon loaded.');
 }
@@ -260,8 +264,18 @@ function mouseUp(e) {
 			if (!target) {
 				switch (takenSlot.type) {
 					case 'attack':
-						changeSize(holding, 30, largeWidth, largeHeight);
-						holding.style.zIndex = 2;
+						var hiddenAttack = false;
+						for (var i = 4; i < aSlots.length; i++) {
+							if (takenSlot == aSlots[i]) hiddenAttack = true;
+						}
+
+						if (hiddenAttack) {
+							changeHidden(holding, 30, largeWidth, largeHeight);
+							holding.style.zIndex = 1;
+						} else {
+							changeSize(holding, 30, largeWidth, largeHeight);
+							holding.style.zIndex = 2;
+						}
 						break;
 
 					case 'hand':
@@ -339,8 +353,16 @@ function rightMouseDown(e) {
 
 //move card to mouse position
 function moveCard(e) {
-	holding.style.left = cursorX - (holding.offsetWidth / 2) + 'px';
-	holding.style.top = cursorY - (holding.offsetHeight / 2) + 'px';
+	var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+	var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+	if (h >= 900 && w >= 1100) {
+		holding.style.left = cursorX - (holding.offsetWidth / 2) + 'px';
+		holding.style.top = cursorY - (holding.offsetHeight / 2) + 'px';
+	} else {
+		holding.style.left = cursorX - (holding.offsetWidth / 2) * 0.6 + 'px';
+		holding.style.top = cursorY - (holding.offsetHeight / 2) * 0.6 + 'px';
+	}
 }
 
 //consume card (for health)
@@ -373,6 +395,10 @@ document.onmousemove = function(event) {
 
 //reposition cards and slots on window resize
 window.onresize = function() {
+	resize();
+}
+
+function resize() {
 	recalculateSlots();
 
 	for (var i = 0; i < mSlots.length; i++) {
@@ -385,6 +411,39 @@ window.onresize = function() {
 
 	for (var i = 0; i < aSlots.length; i++) {
 		if (aSlots[i].card) repositionToSlot(aSlots[i].card, aSlots[i]);
+	}
+
+	var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+	var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+	if (h >= 900 && w >= 1100) {
+		if (screenSmall) {
+			for (var i = 0; i < hSlots.length; i++) {
+				hSlots[i].width = hSlots[i].width / 6 * 10;
+				hSlots[i].height = hSlots[i].height / 6 * 10;
+			}
+
+			for (var i = 0; i < aSlots.length; i++) {
+				aSlots[i].width = aSlots[i].width / 6 * 10;
+				aSlots[i].height = aSlots[i].height / 6 * 10;
+			}
+
+			screenSmall = false;
+		}
+	} else {
+		if (!screenSmall) {
+			for (var i = 0; i < hSlots.length; i++) {
+				hSlots[i].width = hSlots[i].width * 0.6;
+				hSlots[i].height = hSlots[i].height * 0.6;
+			}
+
+			for (var i = 0; i < aSlots.length; i++) {
+				aSlots[i].width = aSlots[i].width * 0.6;
+				aSlots[i].height = aSlots[i].height * 0.6;
+			}
+
+			screenSmall = true;
+		}
 	}
 }
 
