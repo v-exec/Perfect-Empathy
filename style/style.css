@@ -111,10 +111,10 @@ a:hover {
 
 #instructionsbutton,
 #logbutton {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	text-align: right;
+	position: absolute;
+	width: 120px;
+	bottom: 2px;
+	right: -130px;
 	font-family: "Roboto Mono";
 	font-weight: 400;
 	font-size: 15px;
@@ -122,7 +122,7 @@ a:hover {
 }
 
 #logbutton {
-	bottom: 40px;
+	bottom: 27px;
 }
 
 #instructionsbutton:hover {
@@ -318,8 +318,6 @@ a:hover {
 	#main,
 	#inputblocker,
 	#instructions,
-	#instructionsbutton,
-	#logbutton,
 	#cards .card {
 		transform: scale(0.6);
 	}
