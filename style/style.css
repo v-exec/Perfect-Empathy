@@ -28,7 +28,7 @@ a:hover {
 #inputblocker {
 	position: absolute;
 	width: 900px;
-	height: calc(586px + 241.5px + 70px + 3px);
+	height: calc(600px + 241.5px + 70px + 3px);
 	top: 50%;
 	left: 50%;
 	margin: calc((-586px - 241.5px - 70px - 3px) /2) 0 0 calc(-900px/2);
@@ -54,7 +54,7 @@ a:hover {
 
 #field {
 	border-top: 1px solid #555;
-	height: 586px;
+	height: 601px;
 }
 
 #hand {
@@ -69,7 +69,7 @@ a:hover {
 	display: block;
 	position: absolute;
 	width: 200px;
-	height: 900px;
+	height: 915px;
 	top: 0;
 	left: -200px;
 	padding: 15px;
@@ -95,7 +95,7 @@ a:hover {
 	display: none;
 	position: fixed;
 	width: 860px;
-	height: 860px;
+	height: 872px;
 	top: calc(50% - 430px);
 	left: calc(50% - 430px);
 	padding: 15px;
@@ -216,7 +216,7 @@ a:hover {
 
 .cardslot.hidden.end {
 	position: absolute;
-	bottom: -15px;
+	bottom: -1px;
 	right: 20px;
 	margin-right: 0;
 }

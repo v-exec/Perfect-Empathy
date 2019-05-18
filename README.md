@@ -1,6 +1,6 @@
 # Perfect Empathy is a singleplayer strategy roguelike card game.
 
-Play it [here](https://v-exec.github.io/Perfect-Empathy/)!
+Play it [here](https://exp.v-os.ca/perfect-empathy)!
 
 Originally a physical card game, Perfect Empathy is now available on web for higher gameplay accessability.
 
