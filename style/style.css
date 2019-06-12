@@ -29,8 +29,8 @@ a:hover {
 	position: absolute;
 	width: 900px;
 	height: calc(600px + 241.5px + 70px + 3px);
-	top: 50%;
-	left: 50%;
+	top: 50vh;
+	left: 50vw;
 	margin: calc((-586px - 241.5px - 70px - 3px) /2) 0 0 calc(-900px/2);
 }
 
