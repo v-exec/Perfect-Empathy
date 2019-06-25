@@ -192,7 +192,7 @@ a:hover {
 .cardslot {
 	display: inline-block;
 	position: relative;
-	width: calc(((900px - 40px - 2px) / 4) - 18.4px);
+	width: calc(((900px - 2px - 40px - (20px * 3)) / 4));
 	height: 260px;
 	margin: 0 20px 20px 0;
 	border-radius: 6px;
@@ -207,7 +207,7 @@ a:hover {
 
 .cardslot.hidden {
 	position: relative;
-	width: calc(((900px - 40px - 2px) / 4) - 18.4px);
+	width: calc(((900px - 2px - 40px - (20px * 3)) / 4));
 	bottom: 268px;
 	margin-right: 20px;
 	z-index: 1;
@@ -223,7 +223,7 @@ a:hover {
 
 .handslot {
 	display: inline-block;
-	width: calc(((900px - 40px - 2px) / 5) - 19.6px);
+	width: calc(((900px - 2px - 40px - (20px * 4)) / 5));
 	height: 200.5px; /*0.75 ratio*/
 	margin: 0 20px 0 0;
 	border-radius: 6px;
